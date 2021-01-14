@@ -1,34 +1,30 @@
 import React from "react";
 import { Provider } from "react-redux";
-import Cart from "./components/Cart";
-import Filter from "./components/Filter";
-import Products from "./components/Products";
 import store from "./store";
+import { BrowserRouter, Route, Link } from "react-router-dom"
+import HomeScreen from "./screens/HomeScreen";
+import AdminScreen from "./screens/AdminScreen";
+
 
 class App extends React.Component {
-  render(){
+  render() {
     return (
       <Provider store={store}>
-      <div className="grid-container">
-        <header>
-          <a href="/">Bar's React Shopping Cart</a>
-        </header>
-        <main>
-          <div className="content">
-            <div className="main">
-              <Filter></Filter>
-              <Products></Products>
-            </div>
-
-            <div className="sidebar">
-              <Cart/>
-            </div>
-          </div>
-        </main>
-        <footer>
-          All rights reserved.
+        <BrowserRouter>
+          <div className="grid-container">
+            <header>
+              <Link to="/">Bar's React Shopping Cart</Link>
+              <Link to="/admin">Admin</Link>
+            </header>
+            <main>
+              <Route path="/admin" component={AdminScreen} />
+              <Route path="/" component={HomeScreen} exact />
+            </main>
+            <footer>
+              All rights reserved.
         </footer>
-      </div>
+          </div>
+        </BrowserRouter>
       </Provider>
     );
   }
